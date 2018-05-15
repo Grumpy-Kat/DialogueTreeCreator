@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Dialogue Branching</title>
+		<meta charset="UTF-8" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gojs/1.8.18/go-debug.js"></script>
+		<script src="script.js"></script>
+	</head>
+	<body id="body">
+		<label for="category">Category:</label>
+		<select id="category" name="category" oninput="editCategory(this.value)">
+			<option value="text">Text Node</option>
+			<option value="command">Command Node</option>
+		</select>
+		<button id="saveModel" onclick="saveModel()">Save</button>
+		<button id="loadModel" onclick="loadModel()">Load</button>
+		<button id="newModel" onclick="newModel()">Load</button>
+		<div id="graph" style="width: 1260px; height: 540px;"></div>
+	</body>
+</html>
