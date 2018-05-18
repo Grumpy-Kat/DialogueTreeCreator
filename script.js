@@ -17,8 +17,9 @@ window.onload = function(){
 			go.Panel,
 			"Table",
 			{defaultAlignment: go.Spot.Center},
-			$(go.TextBlock, {row: 0, column: 0, editable: true, textAlign: "center"}, new go.Binding("text", "character")),
-			$(go.TextBlock, {row: 1, column: 0, editable: true, textAlign: "center"}, new go.Binding("text", "dialogue"))
+			$(go.TextBlock, {text: "TEXT", row: 0, column: 0, editable: true, textAlign: "center", font: "bold 14pt serif"}),
+			$(go.TextBlock, {row: 1, column: 0, editable: true, textAlign: "center"}, new go.Binding("text", "character")),
+			$(go.TextBlock, {row: 2, column: 0, editable: true, textAlign: "center"}, new go.Binding("text", "dialogue"))
 		)
 	);
 	var commandNode = $(
@@ -32,8 +33,9 @@ window.onload = function(){
 			go.Panel,
 			"Table",
 			{defaultAlignment: go.Spot.Center},
-			$(go.TextBlock, {row: 0, column: 0, editable: true, textAlign: "center"}, new go.Binding("text", "commandName")),
-			$(go.TextBlock, {row: 1, column: 0, editable: true, textAlign: "center"}, new go.Binding("text", "arguments"))
+			$(go.TextBlock, {text: "COMMAND", row: 0, column: 0, editable: true, textAlign: "center", font: "bold 14pt serif"}),
+			$(go.TextBlock, {row: 1, column: 0, editable: true, textAlign: "center"}, new go.Binding("text", "commandName")),
+			$(go.TextBlock, {row: 2, column: 0, editable: true, textAlign: "center"}, new go.Binding("text", "arguments"))
 		)
 	);
 	var branchNode = $(
@@ -47,7 +49,8 @@ window.onload = function(){
 			go.Panel,
 			"Table",
 			{defaultAlignment: go.Spot.Center},
-			$(go.TextBlock, {row: 0, column: 0, editable: true, textAlign: "center"}, new go.Binding("text", "condition"))
+			$(go.TextBlock, {text: "BRANCH", row: 0, column: 0, editable: true, textAlign: "center", font: "bold 14pt serif"}),
+			$(go.TextBlock, {row: 1, column: 0, editable: true, textAlign: "center"}, new go.Binding("text", "condition"))
 		)
 	);
 	var conditionNode = $(
@@ -61,7 +64,8 @@ window.onload = function(){
 			go.Panel,
 			"Table",
 			{defaultAlignment: go.Spot.Center},
-			$(go.TextBlock, {row: 0, column: 0, editable: true, textAlign: "center"}, new go.Binding("text", "conditionResult"))
+			$(go.TextBlock, {text: "CONDITION", row: 0, column: 0, editable: true, textAlign: "center", font: "bold 14pt serif"}),
+			$(go.TextBlock, {row: 1, column: 0, editable: true, textAlign: "center"}, new go.Binding("text", "conditionResult"))
 		)
 	);
 	var template = new go.Map("string", go.Node);
