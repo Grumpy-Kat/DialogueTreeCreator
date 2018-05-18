@@ -10,6 +10,7 @@ window.onload = function(){
 		go.Node,
 		"Table",
 		{resizable: true, resizeObjectName: "SHAPE"},
+		{rotatable: true, rotateObjectName: "SHAPE"},
 		new go.Binding("location", "loc"),
 		$(go.Shape, "RoundedRectangle", {width: 125, height: 125, fill: "#00CCEE", portId: "", fromLinkable: true, toLinkable: true, name: "SHAPE"}),
 		$(
@@ -24,6 +25,7 @@ window.onload = function(){
 		go.Node,
 		"Table",
 		{resizable: true, resizeObjectName: "SHAPE"},
+		{rotatable: true, rotateObjectName: "SHAPE"},
 		new go.Binding("location", "loc"),
 		$(go.Shape, "RoundedRectangle", {width: 125, height: 125, fill: "#78FFD6", portId: "", fromLinkable: true, toLinkable: true, name: "SHAPE"}),
 		$(
@@ -38,6 +40,7 @@ window.onload = function(){
 		go.Node,
 		"Table",
 		{resizable: true, resizeObjectName: "SHAPE"},
+		{rotatable: true, rotateObjectName: "SHAPE"},
 		new go.Binding("location", "loc"),
 		$(go.Shape, "RoundedRectangle", {width: 125, height: 125, fill: "#DD8595", portId: "", fromLinkable: true, toLinkable: true, name: "SHAPE"}),
 		$(
@@ -51,6 +54,7 @@ window.onload = function(){
 		go.Node,
 		"Table",
 		{resizable: true, resizeObjectName: "SHAPE"},
+		{rotatable: true, rotateObjectName: "SHAPE"},
 		new go.Binding("location", "loc"),
 		$(go.Shape, "RoundedRectangle", {width: 125, height: 125, fill: "#A55BE5", portId: "", fromLinkable: true, toLinkable: true, name: "SHAPE"}),
 		$(
@@ -70,7 +74,8 @@ window.onload = function(){
 	tree.linkTemplate = $(
 		go.Link,
 		{relinkableFrom: true, relinkableTo: true, routing: go.Link.Orthogonal},
-		$(go.Shape, {strokeWidth: 3, stroke: "#555"})
+		$(go.Shape, {strokeWidth: 3, stroke: "#555555"}),
+		$(go.Shape, {strokeWidth: 2, stroke: "#000000", toArrow: "Triangle"})
 	);
 	tree.addDiagramListener("ObjectSingleClicked", function(e){
 		var obj = e.subject.part.data;
