@@ -9,8 +9,9 @@ window.onload = function(){
 	var textNode = $(
 		go.Node,
 		"Table",
+		{resizable: true, resizeObjectName: "SHAPE"},
 		new go.Binding("location", "loc"),
-		$(go.Shape, "RoundedRectangle", {width: 125, height: 125, fill: "#00CCEE", portId: "", fromLinkable: true, toLinkable: true}),
+		$(go.Shape, "RoundedRectangle", {width: 125, height: 125, fill: "#00CCEE", portId: "", fromLinkable: true, toLinkable: true, name: "SHAPE"}),
 		$(
 			go.Panel,
 			"Table",
@@ -22,8 +23,9 @@ window.onload = function(){
 	var commandNode = $(
 		go.Node,
 		"Table",
+		{resizable: true, resizeObjectName: "SHAPE"},
 		new go.Binding("location", "loc"),
-		$(go.Shape, "RoundedRectangle", {width: 125, height: 125, fill: "#00FFCC", portId: "", fromLinkable: true, toLinkable: true}),
+		$(go.Shape, "RoundedRectangle", {width: 125, height: 125, fill: "#78FFD6", portId: "", fromLinkable: true, toLinkable: true, name: "SHAPE"}),
 		$(
 			go.Panel,
 			"Table",
@@ -32,9 +34,37 @@ window.onload = function(){
 			$(go.TextBlock, {row: 1, column: 0, editable: true, textAlign: "center"}, new go.Binding("text", "arguments"))
 		)
 	);
+	var branchNode = $(
+		go.Node,
+		"Table",
+		{resizable: true, resizeObjectName: "SHAPE"},
+		new go.Binding("location", "loc"),
+		$(go.Shape, "RoundedRectangle", {width: 125, height: 125, fill: "#DD8595", portId: "", fromLinkable: true, toLinkable: true, name: "SHAPE"}),
+		$(
+			go.Panel,
+			"Table",
+			{defaultAlignment: go.Spot.Center},
+			$(go.TextBlock, {row: 0, column: 0, editable: true, textAlign: "center"}, new go.Binding("text", "condition"))
+		)
+	);
+	var conditionNode = $(
+		go.Node,
+		"Table",
+		{resizable: true, resizeObjectName: "SHAPE"},
+		new go.Binding("location", "loc"),
+		$(go.Shape, "RoundedRectangle", {width: 125, height: 125, fill: "#A55BE5", portId: "", fromLinkable: true, toLinkable: true, name: "SHAPE"}),
+		$(
+			go.Panel,
+			"Table",
+			{defaultAlignment: go.Spot.Center},
+			$(go.TextBlock, {row: 0, column: 0, editable: true, textAlign: "center"}, new go.Binding("text", "conditionResult"))
+		)
+	);
 	var template = new go.Map("string", go.Node);
 	template.add("text", textNode);
 	template.add("command", commandNode);
+	template.add("branch", branchNode);
+	template.add("condition", conditionNode);
 	template.add("", textNode);
 	tree.nodeTemplateMap = template;
 	tree.linkTemplate = $(
@@ -52,22 +82,24 @@ window.onload = function(){
 	var nodeDataArray = [
 		{key: "0", character: "One", dialogue: "Hello!", loc: new go.Point(100,100), category: "text"},
 		{key: "1", character: "One", dialogue: "How are you?", loc: new go.Point(250, 100), category: "text"},
-		{key: "2", character: "Two", dialogue: "Good!", loc: new go.Point(400, 25), category: "text"},
-		{key: "3", character: "Two", dialogue: "Ugh.", loc: new go.Point(400, 175), category: "text"},
-		{key: "4", character: "One", dialogue: "That's good!", loc: new go.Point(550, 25), category: "text"},
-		{key: "5", commandName: "Relationship", arguments: "Clarke|Bellamy|15", loc: new go.Point(700, 25), category: "command"},
-		{key: "6", character: "One", dialogue: "Oh, why?", loc: new go.Point(550, 175), category: "text"},
-		{key: "7", commandName: "Scene", arguments: "dialogue1", loc: new go.Point(850, 100), category: "command"}
+		{key: "2", condition: "PlayerInput", loc: new go.Point(400, 100), category: "branch"},
+		{key: "3", conditionResult: "Good!", loc: new go.Point(550, 25), category: "condition"},
+		{key: "4", conditionResult: "Ugh.", loc: new go.Point(550, 175), category: "condition"},
+		{key: "5", character: "One", dialogue: "That's good!", loc: new go.Point(700, 25), category: "text"},
+		{key: "6", commandName: "Relationship", arguments: "Clarke|Bellamy|15", loc: new go.Point(850, 25), category: "command"},
+		{key: "7", character: "One", dialogue: "Oh, why?", loc: new go.Point(700, 175), category: "text"},
+		{key: "8", commandName: "Scene", arguments: "dialogue1", loc: new go.Point(1000, 100), category: "command"}
 	];
 	var linkDataArray = [
 		{from: "0", to: "1"},
 		{from: "1", to: "2"},
-		{from: "1", to: "3"},
+		{from: "2", to: "3"},
 		{from: "2", to: "4"},
-		{from: "3", to: "6"},
-		{from: "4", to: "5"},
-		{from: "5", to: "7"},
-		{from: "6", to: "7"}
+		{from: "3", to: "5"},
+		{from: "5", to: "6"},
+		{from: "6", to: "8"},
+		{from: "4", to: "7"},
+		{from: "7", to: "8"}
 	];
 	tree.model = new go.GraphLinksModel(nodeDataArray, linkDataArray);
 	tree.toolManager.clickCreatingTool.archetypeNodeData = {key: tree.model.nodeDataArray.length.toString(), character: "", dialogue: " "};
@@ -83,6 +115,12 @@ function editCategory(value){
 			case "command":
 				model.setDataProperty(objSelected, "commandName", "Command Name");
 				model.setDataProperty(objSelected, "arguments", "Arguments\n(separated by |)");
+				break;
+			case "branch":
+				model.setDataProperty(objSelected, "condition", "Condition");
+				break;
+			case "condition":
+				model.setDataProperty(objSelected, "conditionResult", "Condition Result");
 				break;
 			case "text":
 			default:
