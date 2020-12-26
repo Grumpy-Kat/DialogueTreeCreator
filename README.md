@@ -1,2 +1,2 @@
-# DialogueTreeCreator
-Simple tool that generates JSON from dialogue tree to be used for The100FanGame
+# Dialogue Tree Creator
+Simple tool that allows you to visually create a dialogue tree and export it to JSON to use in other projects.
